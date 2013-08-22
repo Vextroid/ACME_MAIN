@@ -6,6 +6,7 @@ package RDB;
 
 import DAO.SavingsDAO;
 import RegClass.SavingsAcc;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
  *
  * @author Vextroid
  */
-public class RDBSavingsDAO implements SavingsDAO{
+public class RDBSavingsDAO implements SavingsDAO, Serializable{
     
     private Connection dbConnection = null;
     private ArrayList employeeList = new ArrayList();
@@ -85,29 +86,33 @@ public class RDBSavingsDAO implements SavingsDAO{
     @Override
     public int getBalance(String accNum)
     {
+        int i = 10;
         try{
-            String bal = "ACE123";
+            //String bal = "ACE123";
         
               
             //INSERT INTO DBUSR.SAVINGS (C_ID, ACC_NUM, BALANCE) VALUES (1,'TRON234',1000);
             //PreparedStatement sqlStatement = dbConnection.prepareStatement("INSERT INTO DBUSR.SAVINGS (C_ID, ACC_NUM, BALANCE) VALUES)" + "VALUES(?,?,?)");
             //SELECT BALANCE FROM DBUSR.SAVINGS;
-            //                                                             "SELECT FIRST_NAME FROM DBUSR.EMPLOYEE WHERE E_ID = "
-            PreparedStatement sqlStatement = dbConnection.prepareStatement("SELECT * FROM DBUSR.SAVINGS WHERE ACC_NUM = " + bal);
+            //                                                      "SELECT FIRST_NAME FROM DBUSR.EMPLOYEE WHERE E_ID = " //Wokrs if its C_ID and not ACC_NUM
+            PreparedStatement sqlStatement = dbConnection.prepareStatement("SELECT BALANCE FROM DBUSR.SAVINGS WHERE ACC_NUM = " + accNum);
 
           
             //sqlStatement.setInt(0, savings.C_ID);
             //sqlStatement.setString(1, savings.accNum);
             //sqlStatement.setInt(2, savings.balance);
           
-            //sqlStatement.executeQuery();
+            sqlStatement.executeQuery();
             //sqlStatement.execute();
             
             ResultSet result = sqlStatement.executeQuery();
             result.next();
-            result.next();
-            result.next();
-            return result.getInt("BALANCE");
+//            result.next();
+//            result.next();
+             i = result.getInt("BALANCE");
+//            int i = 10;
+            return i;
+            
             
            // return bal; 
         }
