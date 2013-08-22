@@ -58,6 +58,7 @@ public class SavingsBean implements SavingsBeanRemote, Serializable {
             SavingsDAO dao = new RDBSavingsDAO(connection);
             SavingsAcc save = new SavingsAcc(id, accNum, balance);
             dao.createSavingsAccount(save);
+                        
         }catch(Exception e)
         {
             System.out.println("Could not create Savings Account.");

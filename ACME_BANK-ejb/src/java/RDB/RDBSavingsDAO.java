@@ -31,12 +31,16 @@ public class RDBSavingsDAO implements SavingsDAO{
     public void createSavingsAccount(SavingsAcc savings)
     {
         try{
+            int id = savings.C_ID;
+            String acc = savings.accNum;
+            int bal = savings.balance;
+            
                                                                         //INSERT INTO DBUSR.SAVINGS (C_ID, ACC_NUM, BALANCE) VALUES (1,'TRON234',1000);
-          PreparedStatement sqlStatement = dbConnection.prepareStatement("INSERT INTO DBUSR.SAVINGS (C_ID, ACC_NUM, BALANCE) VALUES)" + "VALUES(?,?,?)");
+          PreparedStatement sqlStatement = dbConnection.prepareStatement("INSERT INTO DBUSR.SAVINGS (C_ID, ACC_NUM, BALANCE) VALUES" + id + acc + bal );
           
-          sqlStatement.setInt(1, savings.C_ID);
-          sqlStatement.setString(2, savings.accNum);
-          sqlStatement.setInt(3, savings.balance);
+//          sqlStatement.setInt(1, savings.C_ID);
+//          sqlStatement.setString(2, savings.accNum);
+//          sqlStatement.setInt(3, savings.balance);
           
           sqlStatement.executeUpdate();
           //sqlStatement.execute();
