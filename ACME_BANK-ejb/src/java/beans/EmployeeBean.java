@@ -13,14 +13,14 @@ import java.sql.SQLException;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
-import javax.ejb.Stateless;
+import javax.ejb.Stateful;
 import javax.sql.DataSource;
 
 /**
  *
  * @author Vextroid
  */
-@Stateless
+@Stateful
 public class EmployeeBean implements EmployeeBeanRemote, Serializable {
 
     // Add business logic below. (Right-click in editor and choose
@@ -34,6 +34,8 @@ public class EmployeeBean implements EmployeeBeanRemote, Serializable {
     public void initialize(){
         try{
             connection = dataSource.getConnection();
+            
+            //ADD THE TIME OUT THING HERE
         }catch (SQLException sqle)
         {
             sqle.printStackTrace();

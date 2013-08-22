@@ -83,4 +83,22 @@ public class SavingsBean implements SavingsBeanRemote, Serializable {
         }
     }
     
+    @Override
+    public boolean maxSavings(int C_ID)
+    {
+               try{
+            boolean isMax;
+            SavingsDAO dao = new RDBSavingsDAO(connection);
+            //SavingsAcc save = new SavingsAcc(id, accNum, balance);
+            isMax = dao.maxSavings(C_ID);
+             //bal = 10;
+            return isMax;
+        }catch(Exception e)
+        {
+            System.out.println("Could not create Savings Account.");
+            e.printStackTrace();
+            return false;
+        } 
+    }
+    
 }

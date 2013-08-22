@@ -58,17 +58,17 @@ public class RDBSavingsDAO implements SavingsDAO{
     }
     
     
-    @Override
-    public void makeDeposit(String id, int amount)
-    {
-        
-    }
-    
-    @Override
-    public void makeWithdrawl(String id)
-    {
-        
-    }
+//    @Override
+//    public void makeDeposit(String id, int amount)
+//    {
+//        
+//    }
+//    
+//    @Override
+//    public void makeWithdrawl(String id)
+//    {
+//        
+//    }
     
     @Override
     public void getAllSavingsAccount()
@@ -112,5 +112,46 @@ public class RDBSavingsDAO implements SavingsDAO{
                   return 12312;
                 }
     }
+    
+    @Override
+    public boolean maxSavings(int C_ID)
+    {
+          try{
+          int count =0;          
+                                                                        //INSERT INTO DBUSR.SAVINGS (C_ID, ACC_NUM, BALANCE) VALUES (1,'TRON234',1000);
+          PreparedStatement sqlStatement = dbConnection.prepareStatement("SELECT * FROM DBUSR.SAVINGS WHERE C_ID = " + C_ID);
+          
+          //sqlStatement.setInt(1, savings.C_ID);
+          //sqlStatement.setString(2, savings.accNum);
+          //sqlStatement.setInt(3, savings.balance);
+          
+          ResultSet result = sqlStatement.executeQuery();
+          
+          //sqlStatement.executeQuery();
+          //sqlStatement.execute();
+          
+          while(result.next())
+          {
+              count ++;
+          }
+          
+          if (count <2)
+          {
+          return true;
+          }
+          else
+          {
+              return false;
+          }
+        }
+        catch (SQLException sqlException)
+                {
+                  System.out.println("Could not create savings account.");
+                  sqlException.printStackTrace();
+                  return false;
+                }
+    }
+    
+    
     
 }
