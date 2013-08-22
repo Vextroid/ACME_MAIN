@@ -37,11 +37,12 @@ public class RDBSavingsDAO implements SavingsDAO{
             //int bal = savings.balance;
             
                                                                         //INSERT INTO DBUSR.SAVINGS (C_ID, ACC_NUM, BALANCE) VALUES (1,'TRON234',1000);
-          PreparedStatement sqlStatement = dbConnection.prepareStatement("INSERT INTO DBUSR.SAVINGS (C_ID, ACC_NUM, BALANCE)" + "VALUES(?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+          PreparedStatement sqlStatement = dbConnection.prepareStatement("INSERT INTO DBUSR.SAVINGS (C_ID, ACC_NUM, BALANCE)" + "VALUES(?,?,?)", Statement.RETURN_GENERATED_KEYS);
+          //PreparedStatement sqlStatement = dbConnection.prepareStatement("INSERT INTO DBUSR.SAVINGS (C_ID, ACC_NUM, BALANCE) VALUES" 
           
-          sqlStatement.setInt(0, savings.C_ID);
-          sqlStatement.setString(1, savings.accNum);
-          sqlStatement.setInt(2, savings.balance);
+          sqlStatement.setInt(1, savings.C_ID);
+          sqlStatement.setString(2, savings.accNum);
+          sqlStatement.setInt(3, savings.balance);
           
           sqlStatement.executeUpdate();
           //sqlStatement.execute();
