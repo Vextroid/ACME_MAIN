@@ -87,6 +87,7 @@ public class RDBSavingsDAO implements SavingsDAO, Serializable{
     public int getBalance(int id, String accNum)
     {
         int i = 10;
+        String acc = accNum;
         try{
             //String acc;
         
@@ -95,7 +96,7 @@ public class RDBSavingsDAO implements SavingsDAO, Serializable{
             //PreparedStatement sqlStatement = dbConnection.prepareStatement("INSERT INTO DBUSR.SAVINGS (C_ID, ACC_NUM, BALANCE) VALUES)" + "VALUES(?,?,?)");
             //SELECT BALANCE FROM DBUSR.SAVINGS;
             //                                                      "SELECT FIRST_NAME FROM DBUSR.EMPLOYEE WHERE E_ID = " //Wokrs if its C_ID and not ACC_NUM
-            PreparedStatement sqlStatement = dbConnection.prepareStatement("SELECT BALANCE FROM DBUSR.SAVINGS WHERE C_ID = " + id);
+            PreparedStatement sqlStatement = dbConnection.prepareStatement("SELECT * FROM DBUSR.SAVINGS WHERE C_ID = " + id);
 
           
             //sqlStatement.setInt(0, savings.C_ID);
@@ -108,7 +109,8 @@ public class RDBSavingsDAO implements SavingsDAO, Serializable{
             ResultSet result = sqlStatement.executeQuery();
             while(result.next())
             {
-                if(accNum.equals(result.getString("ACC_NUM")));
+                String resultAcc = result.getString("ACC_NUM");
+                if(acc.equals(resultAcc))
                 {
                     i = result.getInt("BALANCE");
                 }
