@@ -18,7 +18,7 @@ public interface SavingsDAO {
     //public void makeDeposit(String id, int amount);
     //public void makeWithdrawl(String id);
     public void getAllSavingsAccount();
-    public int getBalance(String accNum);
+    public int getBalance(int id, String accNum);
     public boolean maxSavings(int C_ID);
     
 }
