@@ -84,18 +84,20 @@ public class RDBSavingsDAO implements SavingsDAO, Serializable{
     }
     
     @Override
-    public int getBalance(String accNum)
+    public int getBalance(int id, String accNum)
     {
+        //THIS WORKS DONT TOUCH!!!
         int i = 10;
+        String acc = accNum;
         try{
-            //String bal = "ACE123";
+            //String acc;
         
               
             //INSERT INTO DBUSR.SAVINGS (C_ID, ACC_NUM, BALANCE) VALUES (1,'TRON234',1000);
             //PreparedStatement sqlStatement = dbConnection.prepareStatement("INSERT INTO DBUSR.SAVINGS (C_ID, ACC_NUM, BALANCE) VALUES)" + "VALUES(?,?,?)");
             //SELECT BALANCE FROM DBUSR.SAVINGS;
             //                                                      "SELECT FIRST_NAME FROM DBUSR.EMPLOYEE WHERE E_ID = " //Wokrs if its C_ID and not ACC_NUM
-            PreparedStatement sqlStatement = dbConnection.prepareStatement("SELECT BALANCE FROM DBUSR.SAVINGS WHERE ACC_NUM = " + accNum);
+            PreparedStatement sqlStatement = dbConnection.prepareStatement("SELECT * FROM DBUSR.SAVINGS WHERE C_ID = " + id);
 
           
             //sqlStatement.setInt(0, savings.C_ID);
@@ -106,10 +108,18 @@ public class RDBSavingsDAO implements SavingsDAO, Serializable{
             //sqlStatement.execute();
             
             ResultSet result = sqlStatement.executeQuery();
-            result.next();
+            while(result.next())
+            {
+                String resultAcc = result.getString("ACC_NUM");
+                if(acc.equals(resultAcc))
+                {
+                    i = result.getInt("BALANCE");
+                }
+            }
+            
 //            result.next();
 //            result.next();
-             i = result.getInt("BALANCE");
+             //i = result.getInt("BALANCE");
 //            int i = 10;
             return i;
             

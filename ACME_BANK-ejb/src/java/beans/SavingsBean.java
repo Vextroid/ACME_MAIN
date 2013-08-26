@@ -67,13 +67,13 @@ public class SavingsBean implements SavingsBeanRemote, Serializable {
     }
 
     @Override
-    public int getBalance(String accNum)
+    public int getBalance(int id,String accNum)
     {
         try{
             int bal;
             SavingsDAO dao = new RDBSavingsDAO(connection);
             //SavingsAcc save = new SavingsAcc(id, accNum, balance);
-            bal = dao.getBalance(accNum);
+            bal = dao.getBalance(id,accNum);
              //bal = 10;
             return bal;
         }catch(Exception e)
