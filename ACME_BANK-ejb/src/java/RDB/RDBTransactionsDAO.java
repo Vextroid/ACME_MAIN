@@ -5,6 +5,7 @@
 package RDB;
 
 import DAO.TransactionDAO;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
  *
  * @author Vextroid
  */
-public class RDBTransactionsDAO implements TransactionDAO {
+public class RDBTransactionsDAO implements TransactionDAO, Serializable {
     
     private Connection dbConnection = null;
     private ArrayList employeeList = new ArrayList();
@@ -34,7 +35,7 @@ public class RDBTransactionsDAO implements TransactionDAO {
             //int bal = savings.balance;
             
                                                                     //UPDATE DBUSR.SAVINGS SET BALANCE = BALANCE+100 WHERE ACC_NUM = 'ROTT2013';
-          PreparedStatement sqlStatement = dbConnection.prepareStatement("UPDATE DBUSR.SAVINGS SET BALANCE = BALANCE" + amount +" WHERE ACC_NUM "+ accNum , Statement.RETURN_GENERATED_KEYS);
+          PreparedStatement sqlStatement = dbConnection.prepareStatement("UPDATE DBUSR.SAVINGS SET BALANCE = BALANCE+" + amount +" WHERE ACC_NUM "+ accNum , Statement.RETURN_GENERATED_KEYS);
           PreparedStatement sqlStatement2 = dbConnection.prepareStatement("INSERT INTO DBUSR.TRANSACTIONS (C_ID, ACC_NUM, AMOUNT, DESCRIPTION)" + "VALUES(?,?,?.?)", Statement.RETURN_GENERATED_KEYS);
           
           sqlStatement2.setInt(1, C_ID);
@@ -43,7 +44,7 @@ public class RDBTransactionsDAO implements TransactionDAO {
           sqlStatement2.setString(4, desc);
           
           sqlStatement.executeUpdate();
-          //sqlStatement.execute();
+          sqlStatement2.executeUpdate();
           
           
         }

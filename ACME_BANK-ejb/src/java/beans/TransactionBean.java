@@ -6,6 +6,7 @@ package beans;
 
 import DAO.TransactionDAO;
 import RDB.RDBTransactionsDAO;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.SQLException;
 import javax.annotation.PostConstruct;
@@ -19,7 +20,7 @@ import javax.sql.DataSource;
  * @author Vextroid
  */
 @Stateless
-public class TransactionBean implements TransactionBeanRemote {
+public class TransactionBean implements TransactionBeanRemote, Serializable {
 
   @Resource(lookup = "jdbc/acmeDBDatasource")
     private DataSource dataSource;
