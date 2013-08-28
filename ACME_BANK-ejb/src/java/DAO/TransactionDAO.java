@@ -10,4 +10,7 @@ package DAO;
  */
 public interface TransactionDAO {
     
+    public void deposit(int C_ID, String accNum, int amount, String desc);
+    public void withdrawl(int C_ID, String accNum, int amount, String desc);
+    
 }
