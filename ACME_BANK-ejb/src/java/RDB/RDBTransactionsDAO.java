@@ -34,16 +34,17 @@ public class RDBTransactionsDAO implements TransactionDAO, Serializable {
             //String acc = savings.accNum;
             //int bal = savings.balance;
             
-                                                                    //UPDATE DBUSR.SAVINGS SET BALANCE = BALANCE+100 WHERE ACC_NUM = 'ROTT2013';
-          PreparedStatement sqlStatement = dbConnection.prepareStatement("UPDATE DBUSR.SAVINGS SET BALANCE = BALANCE+" + amount +" WHERE ACC_NUM "+ accNum , Statement.RETURN_GENERATED_KEYS);
-          PreparedStatement sqlStatement2 = dbConnection.prepareStatement("INSERT INTO DBUSR.TRANSACTIONS (C_ID, ACC_NUM, AMOUNT, DESCRIPTION)" + "VALUES(?,?,?.?)", Statement.RETURN_GENERATED_KEYS);
+                                                                        //UPDATE DBUSR.SAVINGS SET BALANCE = BALANCE+100 WHERE ACC_NUM = 'ROTT2013';
+          PreparedStatement sqlStatement = dbConnection.prepareStatement("UPDATE DBUSR.SAVINGS SET BALANCE = BALANCE+"+ amount +"WHERE ACC_NUM = "+ accNum);
+          sqlStatement.executeUpdate();
+           
+          PreparedStatement sqlStatement2 = dbConnection.prepareStatement("INSERT INTO DBUSR.TRANSACTIONS (ACC_NUM, AMOUNT, DESCRIPTION)" + "VALUES(?,?,?)", Statement.RETURN_GENERATED_KEYS);
           
           sqlStatement2.setInt(1, C_ID);
-          sqlStatement2.setString(2, accNum);
-          sqlStatement2.setInt(3, amount);
-          sqlStatement2.setString(4, desc);
-          
-          sqlStatement.executeUpdate();
+          sqlStatement2.setString(1, accNum);
+          sqlStatement2.setInt(2, amount);
+          sqlStatement2.setString(3, desc);
+       
           sqlStatement2.executeUpdate();
           
           
