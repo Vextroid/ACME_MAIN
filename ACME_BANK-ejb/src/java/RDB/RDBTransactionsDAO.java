@@ -52,23 +52,23 @@ public class RDBTransactionsDAO implements TransactionDAO, Serializable {
 //            }
 //             
 //          int newAmount = i+transactions.amount;   
-//             
+             
 //             
 //                                                                        //UPDATE DBUSR.SAVINGS SET BALANCE = BALANCE+100 WHERE ACC_NUM = 'ROTT2013';
-//          PreparedStatement sqlStatement = dbConnection.prepareStatement("UPDATE DBUSR.SAVINGS SET BALANCE = ? WHERE ACC_NUM = ? ");
-//          sqlStatement.setInt(1, newAmount);
-//          sqlStatement.setString(2, transactions.acc);
-//          sqlStatement.executeUpdate();
+            PreparedStatement sqlStatement = dbConnection.prepareStatement("UPDATE DBUSR.SAVINGS SET BALANCE = ? WHERE ACC_NUM = ? ");
+            sqlStatement.setInt(1, transactions.amount);
+            sqlStatement.setString(2, transactions.acc);
+            sqlStatement.executeUpdate();
          
         //PreparedStatement sqlStatement2 = dbConnection.prepareStatement("INSERT INTO DBUSR.SAVINGS      (C_ID, ACC_NUM, BALANCE)"       + "VALUES(?,?,?)", Statement.RETURN_GENERATED_KEYS);   
-          PreparedStatement inserter = dbConnection.prepareStatement("INSERT INTO DBUSR.TRANSACTIONS (ACC_NUM, AMOUNT, DESCRIPTION)" + "VALUES(?,?,?)", Statement.RETURN_GENERATED_KEYS);
-          
-          //sqlStatement2.setInt(1, C_ID);
-          inserter.setString(1, transactions.acc);
-          inserter.setInt(2, transactions.amount);
-          inserter.setString(3, transactions.desc);
-       
-          inserter.executeUpdate();
+//          PreparedStatement inserter = dbConnection.prepareStatement("INSERT INTO DBUSR.TRANSACTIONS (ACC_NUM, AMOUNT, DESCRIPTION)" + "VALUES(?,?,?)", Statement.RETURN_GENERATED_KEYS);
+//          
+//          //sqlStatement2.setInt(1, C_ID);
+//          inserter.setString(1, transactions.acc);
+//          inserter.setInt(2, transactions.amount);
+//          inserter.setString(3, transactions.desc);
+//       
+//          inserter.executeUpdate();
           
           //ResultSet result = inserter.getGeneratedKeys();
           //result.next();
@@ -97,8 +97,8 @@ public class RDBTransactionsDAO implements TransactionDAO, Serializable {
 //            String description = desc;
             
                                                                         //UPDATE DBUSR.SAVINGS SET BALANCE = BALANCE+100 WHERE ACC_NUM = 'ROTT2013';
-          PreparedStatement sqlStatement = dbConnection.prepareStatement("UPDATE DBUSR.SAVINGS SET BALANCE = BALANCE-"+ transactions.amount +"WHERE ACC_NUM = "+ transactions.acc);
-          sqlStatement.executeUpdate();
+//          PreparedStatement sqlStatement = dbConnection.prepareStatement("UPDATE DBUSR.SAVINGS SET BALANCE = BALANCE-"+ transactions.amount +"WHERE ACC_NUM = "+ transactions.acc);
+//          sqlStatement.executeUpdate();
          
         //PreparedStatement sqlStatement2 = dbConnection.prepareStatement("INSERT INTO DBUSR.SAVINGS      (C_ID, ACC_NUM, BALANCE)"       + "VALUES(?,?,?)", Statement.RETURN_GENERATED_KEYS);   
           PreparedStatement sqlStatement2 = dbConnection.prepareStatement("INSERT INTO DBUSR.TRANSACTIONS (ACC_NUM, AMOUNT, DESCRIPTION)" + "VALUES(?,?,?)", Statement.RETURN_GENERATED_KEYS);
