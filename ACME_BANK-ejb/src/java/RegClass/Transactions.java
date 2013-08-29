@@ -10,4 +10,19 @@ package RegClass;
  */
 public class Transactions {
     
+        public String C_ID;
+    public String cid;
+    public String acc;
+    public int amount;
+    public String desc;
+    
+    public Transactions(String accNum, int amount, String description)
+    {
+        //C_ID = id;
+        //cid = C_ID;
+        acc = accNum;
+        this.amount = amount;
+        desc = description;
+    }
+    
 }
