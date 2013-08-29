@@ -37,41 +37,41 @@ public class RDBTransactionsDAO implements TransactionDAO, Serializable {
 //            int am = amount;
 //            String description = desc;
            
-            PreparedStatement getBal = dbConnection.prepareStatement("SELECT * FROM DBUSR.SAVINGS WHERE C_ID = " + transactions.C_ID);       
-            getBal.executeQuery();
-            //sqlStatement.execute();
-            
-            ResultSet result = getBal.executeQuery();
-            while(result.next())
-            {
-                String resultAcc = result.getString("ACC_NUM");
-                if(transactions.acc.equals(resultAcc))
-                {
-                    i = result.getInt("BALANCE");
-                }
-            }
-             
-             
-             
-             
-                                                                        //UPDATE DBUSR.SAVINGS SET BALANCE = BALANCE+100 WHERE ACC_NUM = 'ROTT2013';
-          PreparedStatement sqlStatement = dbConnection.prepareStatement("UPDATE DBUSR.SAVINGS SET BALANCE = ? WHERE ACC_NUM = ?");
-          sqlStatement.setInt(1, i+transactions.amount);
-          sqlStatement.setString(2, transactions.acc);
-          sqlStatement.executeUpdate();
+//            PreparedStatement getBal = dbConnection.prepareStatement("SELECT * FROM DBUSR.SAVINGS WHERE C_ID = " + transactions.C_ID);       
+//            getBal.executeQuery();
+//            //sqlStatement.execute();
+//            
+//            ResultSet result = getBal.executeQuery();
+//            while(result.next())
+//            {
+//                String resultAcc = result.getString("ACC_NUM");
+//                if(transactions.acc.equals(resultAcc))
+//                {
+//                    i = result.getInt("BALANCE");
+//                }
+//            }
+//             
+//          int newAmount = i+transactions.amount;   
+//             
+//             
+//                                                                        //UPDATE DBUSR.SAVINGS SET BALANCE = BALANCE+100 WHERE ACC_NUM = 'ROTT2013';
+//          PreparedStatement sqlStatement = dbConnection.prepareStatement("UPDATE DBUSR.SAVINGS SET BALANCE = ? WHERE ACC_NUM = ? ");
+//          sqlStatement.setInt(1, newAmount);
+//          sqlStatement.setString(2, transactions.acc);
+//          sqlStatement.executeUpdate();
          
         //PreparedStatement sqlStatement2 = dbConnection.prepareStatement("INSERT INTO DBUSR.SAVINGS      (C_ID, ACC_NUM, BALANCE)"       + "VALUES(?,?,?)", Statement.RETURN_GENERATED_KEYS);   
           PreparedStatement inserter = dbConnection.prepareStatement("INSERT INTO DBUSR.TRANSACTIONS (ACC_NUM, AMOUNT, DESCRIPTION)" + "VALUES(?,?,?)", Statement.RETURN_GENERATED_KEYS);
           
           //sqlStatement2.setInt(1, C_ID);
-          inserter.setString(2, transactions.acc);
-          inserter.setInt(3, transactions.amount);
-          inserter.setString(4, transactions.desc);
+          inserter.setString(1, transactions.acc);
+          inserter.setInt(2, transactions.amount);
+          inserter.setString(3, transactions.desc);
        
           inserter.executeUpdate();
           
           //ResultSet result = inserter.getGeneratedKeys();
-          result.next();
+          //result.next();
           //customer.C_ID = result.getString(1);
           //customer.FIRST_NAME = result.getString(2);
           //customer.LAST_NAME = result.getString(3);
