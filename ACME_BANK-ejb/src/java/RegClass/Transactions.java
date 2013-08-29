@@ -16,10 +16,10 @@ public class Transactions {
     public int amount;
     public String desc;
     
-    public Transactions(String C_ID, String accNum, int amount, String description)
+    public Transactions(String accNum, int amount, String description)
     {
         //C_ID = id;
-        cid = C_ID;
+        //cid = C_ID;
         acc = accNum;
         this.amount = amount;
         desc = description;

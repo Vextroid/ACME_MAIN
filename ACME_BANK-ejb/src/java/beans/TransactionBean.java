@@ -6,6 +6,8 @@ package beans;
 
 import DAO.TransactionDAO;
 import RDB.RDBTransactionsDAO;
+import RegClass.SavingsAcc;
+import RegClass.Transactions;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -56,20 +58,29 @@ public class TransactionBean implements TransactionBeanRemote, Serializable {
     {
          try{
             TransactionDAO dao = new RDBTransactionsDAO(connection);
-            //SavingsAcc save = new SavingsAcc(id, accNum, balance);
-            dao.deposit(C_ID, accNum, amount, description);
+            Transactions trans = new Transactions(accNum, amount, description);
+            dao.deposit(trans);
                         
         }catch(Exception e)
         {
-            System.out.println("Could not create Savings Account.");
+            System.out.println("Could not make a deposit.");
             e.printStackTrace();
         }
     }
     
     @Override
-    public void withdrawl(int C_ID, String accNum, int amount, String desc)
+    public void withdrawl(int C_ID, String accNum, int amount, String description)
     {
-        
+                 try{
+            TransactionDAO dao = new RDBTransactionsDAO(connection);
+            Transactions trans = new Transactions(accNum, amount, description);
+            dao.deposit(trans);
+                        
+        }catch(Exception e)
+        {
+            System.out.println("Could not make a withdrawl.");
+            e.printStackTrace();
+        }
     }
 
 }

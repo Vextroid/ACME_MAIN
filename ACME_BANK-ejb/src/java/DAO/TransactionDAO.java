@@ -4,13 +4,15 @@
  */
 package DAO;
 
+import RegClass.Transactions;
+
 /**
  *
  * @author Vextroid
  */
 public interface TransactionDAO {
     
-    public void deposit(int C_ID, String accNum, int amount, String desc);
-    public void withdrawl(int C_ID, String accNum, int amount, String desc);
+    public void deposit(Transactions transaction);
+    public void withdrawl(Transactions transaction);
     
 }
