@@ -33,20 +33,17 @@ public class RDBSavingsDAO implements SavingsDAO, Serializable{
     public void createSavingsAccount(SavingsAcc savings)
     {
         try{
-            //int id = savings.C_ID;
-            //String acc = savings.accNum;
-            //int bal = savings.balance;
+            
             
                                                                         //INSERT INTO DBUSR.SAVINGS (C_ID, ACC_NUM, BALANCE) VALUES (1,'TRON234',1000);
           PreparedStatement sqlStatement = dbConnection.prepareStatement("INSERT INTO DBUSR.SAVINGS (C_ID, ACC_NUM, BALANCE)" + "VALUES(?,?,?)", Statement.RETURN_GENERATED_KEYS);
-          //PreparedStatement sqlStatement = dbConnection.prepareStatement("INSERT INTO DBUSR.SAVINGS (C_ID, ACC_NUM, BALANCE) VALUES" 
           
           sqlStatement.setInt(1, savings.C_ID);
           sqlStatement.setString(2, savings.accNum);
           sqlStatement.setInt(3, savings.balance);
           
           sqlStatement.executeUpdate();
-          //sqlStatement.execute();
+          
           
           
         }
@@ -90,22 +87,15 @@ public class RDBSavingsDAO implements SavingsDAO, Serializable{
         int i = 10;
         String acc = accNum;
         try{
-            //String acc;
-        
-              
-            //INSERT INTO DBUSR.SAVINGS (C_ID, ACC_NUM, BALANCE) VALUES (1,'TRON234',1000);
-            //PreparedStatement sqlStatement = dbConnection.prepareStatement("INSERT INTO DBUSR.SAVINGS (C_ID, ACC_NUM, BALANCE) VALUES)" + "VALUES(?,?,?)");
-            //SELECT BALANCE FROM DBUSR.SAVINGS;
+
             //                                                      "SELECT FIRST_NAME FROM DBUSR.EMPLOYEE WHERE E_ID = " //Wokrs if its C_ID and not ACC_NUM
             PreparedStatement sqlStatement = dbConnection.prepareStatement("SELECT * FROM DBUSR.SAVINGS WHERE C_ID = " + id);
 
           
-            //sqlStatement.setInt(0, savings.C_ID);
-            //sqlStatement.setString(1, savings.accNum);
-            //sqlStatement.setInt(2, savings.balance);
+
           
             sqlStatement.executeQuery();
-            //sqlStatement.execute();
+           
             
             ResultSet result = sqlStatement.executeQuery();
             while(result.next())
@@ -124,7 +114,7 @@ public class RDBSavingsDAO implements SavingsDAO, Serializable{
             return i;
             
             
-           // return bal; 
+           
         }
         catch (SQLException sqlException)
                 {

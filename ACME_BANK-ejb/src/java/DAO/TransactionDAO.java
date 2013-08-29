@@ -5,6 +5,7 @@
 package DAO;
 
 import RegClass.Transactions;
+import java.util.List;
 
 /**
  *
@@ -14,5 +15,6 @@ public interface TransactionDAO {
     
     public void deposit(Transactions transaction);
     public void withdrawl(Transactions transaction);
+    public List viewAllTransactions(String accNum);
     
 }
