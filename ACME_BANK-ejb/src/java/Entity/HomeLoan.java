@@ -17,14 +17,14 @@ import javax.persistence.Id;
 @Entity
 public class HomeLoan implements Serializable {
     private static final long serialVersionUID = 1L;
-    //@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Id
-    private int C_ID;
+    //@Id
+    private Integer C_ID;
     private String accNum;
-    private int amountBorrowed;
-    private int amountRepayed;
+    private Integer amountBorrowed;
+    private Integer amountRepayed;
     
     
     //GETTERS
