@@ -2,10 +2,8 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package DAO;
+package EntityDAO;
 
-import DAO.exceptions.NonexistentEntityException;
-import DAO.exceptions.RollbackFailureException;
 import Entity.Customer;
 import java.io.Serializable;
 import javax.persistence.Query;
@@ -16,6 +14,8 @@ import Entity.Homeloan;
 import java.util.ArrayList;
 import java.util.Collection;
 import Entity.Savings;
+import EntityDAO.exceptions.NonexistentEntityException;
+import EntityDAO.exceptions.RollbackFailureException;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

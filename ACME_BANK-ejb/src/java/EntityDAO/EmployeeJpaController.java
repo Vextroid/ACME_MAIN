@@ -2,11 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package DAO;
+package EntityDAO;
 
-import DAO.exceptions.NonexistentEntityException;
-import DAO.exceptions.RollbackFailureException;
 import Entity.Employee;
+import EntityDAO.exceptions.NonexistentEntityException;
+import EntityDAO.exceptions.RollbackFailureException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
