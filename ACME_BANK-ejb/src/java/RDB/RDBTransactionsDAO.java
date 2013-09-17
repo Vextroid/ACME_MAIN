@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 public class RDBTransactionsDAO implements TransactionDAO, Serializable {
     
     private Connection dbConnection = null;
-    private ArrayList employeeList = new ArrayList();
+    private ArrayList transacationsList = new ArrayList();
     
     public RDBTransactionsDAO(Connection connection) {
         this.dbConnection = connection;    
@@ -52,15 +53,15 @@ public class RDBTransactionsDAO implements TransactionDAO, Serializable {
 //            }
 //             
 //          int newAmount = i+transactions.amount;   
-//             
+             
 //             
 //                                                                        //UPDATE DBUSR.SAVINGS SET BALANCE = BALANCE+100 WHERE ACC_NUM = 'ROTT2013';
-//          PreparedStatement sqlStatement = dbConnection.prepareStatement("UPDATE DBUSR.SAVINGS SET BALANCE = ? WHERE ACC_NUM = ? ");
-//          sqlStatement.setInt(1, newAmount);
-//          sqlStatement.setString(2, transactions.acc);
-//          sqlStatement.executeUpdate();
+            PreparedStatement sqlStatement = dbConnection.prepareStatement("UPDATE DBUSR.SAVINGS SET BALANCE = ? WHERE ACC_NUM = ? ");
+            sqlStatement.setInt(1, transactions.amount);
+            sqlStatement.setString(2, transactions.acc);
+            sqlStatement.executeUpdate();
          
-        //PreparedStatement sqlStatement2 = dbConnection.prepareStatement("INSERT INTO DBUSR.SAVINGS      (C_ID, ACC_NUM, BALANCE)"       + "VALUES(?,?,?)", Statement.RETURN_GENERATED_KEYS);   
+        PreparedStatement sqlStatement2 = dbConnection.prepareStatement("INSERT INTO DBUSR.SAVINGS      (C_ID, ACC_NUM, BALANCE)"       + "VALUES(?,?,?)", Statement.RETURN_GENERATED_KEYS);   
           PreparedStatement inserter = dbConnection.prepareStatement("INSERT INTO DBUSR.TRANSACTIONS (ACC_NUM, AMOUNT, DESCRIPTION)" + "VALUES(?,?,?)", Statement.RETURN_GENERATED_KEYS);
           
           //sqlStatement2.setInt(1, C_ID);
@@ -97,9 +98,11 @@ public class RDBTransactionsDAO implements TransactionDAO, Serializable {
 //            String description = desc;
             
                                                                         //UPDATE DBUSR.SAVINGS SET BALANCE = BALANCE+100 WHERE ACC_NUM = 'ROTT2013';
-          PreparedStatement sqlStatement = dbConnection.prepareStatement("UPDATE DBUSR.SAVINGS SET BALANCE = BALANCE-"+ transactions.amount +"WHERE ACC_NUM = "+ transactions.acc);
-          sqlStatement.executeUpdate();
-         
+            PreparedStatement sqlStatement = dbConnection.prepareStatement("UPDATE DBUSR.SAVINGS SET BALANCE = ? WHERE ACC_NUM = ? ");
+            sqlStatement.setInt(1, transactions.amount);
+            sqlStatement.setString(2, transactions.acc);
+            sqlStatement.executeUpdate();
+            
         //PreparedStatement sqlStatement2 = dbConnection.prepareStatement("INSERT INTO DBUSR.SAVINGS      (C_ID, ACC_NUM, BALANCE)"       + "VALUES(?,?,?)", Statement.RETURN_GENERATED_KEYS);   
           PreparedStatement sqlStatement2 = dbConnection.prepareStatement("INSERT INTO DBUSR.TRANSACTIONS (ACC_NUM, AMOUNT, DESCRIPTION)" + "VALUES(?,?,?)", Statement.RETURN_GENERATED_KEYS);
           
@@ -124,6 +127,45 @@ public class RDBTransactionsDAO implements TransactionDAO, Serializable {
                 {
                   System.out.println("Could not make a deposit.");
                   sqlException.printStackTrace();
+                }
+        
+    }
+    
+    @Override
+    public List viewAllTransactions(String accNum)
+    {
+                 try{
+
+        //PreparedStatement sqlStatement2 = dbConnection.prepareStatement("INSERT INTO DBUSR.SAVINGS      (C_ID, ACC_NUM, BALANCE)"       + "VALUES(?,?,?)", Statement.RETURN_GENERATED_KEYS);   
+          PreparedStatement sqlStatement = dbConnection.prepareStatement("SELECT * FROM DBUSR.TRANSACTIONS WHERE ACC_NUM =" + accNum, Statement.RETURN_GENERATED_KEYS);
+          
+          //sqlStatement2.setInt(1, C_ID);
+          //sqlStatement2.setString(1, transactions.acc);
+          //sqlStatement2.setInt(2, transactions.amount);
+          //sqlStatement2.setString(3, transactions.desc);
+       
+          sqlStatement.executeUpdate();
+          
+          ResultSet result = sqlStatement.getGeneratedKeys();
+          result.next();
+          
+             while (result.next())
+          {
+              transacationsList.add(result);
+          }
+          //customer.C_ID = result.getString(1);
+          //customer.FIRST_NAME = result.getString(2);
+          //customer.LAST_NAME = result.getString(3);
+          //customer.DOB = result.getString(4);
+          //customer.ADDRESS = result.getString(5);
+          //System.out.println("Customer" + customer.C_ID + "created.");
+          return transacationsList;
+        }
+        catch (SQLException sqlException)
+                {
+                  System.out.println("Could not make a deposit.");
+                  sqlException.printStackTrace();
+                  return transacationsList;
                 }
         
     }

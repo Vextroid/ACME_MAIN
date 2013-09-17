@@ -161,22 +161,14 @@ public class RDBCustomerDAO implements CustomerDAO{
               try{
           PreparedStatement sqlStatement = dbConnection.prepareStatement("SELECT * FROM DBUSR.CUSTOMER", Statement.RETURN_GENERATED_KEYS);
           
-          //sqlStatement.setString(1, customer.C_ID);
-          //sqlStatement.setString(2, customer.FIRST_NAME);
-          //sqlStatement.setString(3, customer.LAST_NAME);
-          //sqlStatement.setString(4, customer.DOB);
-          //sqlStatement.setString(5, customer.ADDRESS);
+
           
           sqlStatement.executeQuery();
           
           ResultSet result = sqlStatement.getResultSet();
           result.next();
           customerList.add(result);
-          //customer.C_ID = result.getString(1);
-          //customer.FIRST_NAME = result.getString(2);
-          //customer.LAST_NAME = result.getString(3);
-          //customer.DOB = result.getString(4);
-          //customer.ADDRESS = result.getString(5);
+
           System.out.println();
           System.out.println(customerList);
       }catch (SQLException sqlException)

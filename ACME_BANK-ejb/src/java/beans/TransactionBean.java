@@ -6,11 +6,12 @@ package beans;
 
 import DAO.TransactionDAO;
 import RDB.RDBTransactionsDAO;
-import RegClass.SavingsAcc;
 import RegClass.Transactions;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
@@ -83,4 +84,22 @@ public class TransactionBean implements TransactionBeanRemote, Serializable {
         }
     }
 
+    @Override
+    public List viewAllTransactions(String accNum)
+    {
+        ArrayList transList = new ArrayList();
+                 try{
+            TransactionDAO dao = new RDBTransactionsDAO(connection);
+            //Transactions trans = new Transactions(accNum);
+            dao.viewAllTransactions(accNum);
+            return transList;        
+            
+        }catch(Exception e)
+        {
+            System.out.println("Could not make a withdrawl.");
+            e.printStackTrace();
+            return transList;
+        }
+    }
+    
 }
