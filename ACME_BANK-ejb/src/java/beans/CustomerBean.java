@@ -80,15 +80,18 @@ public class CustomerBean implements CustomerBeanRemote, Serializable {
             CustomerDAO dao = new RDBCustomerDAO(connection);
           //Employee employee = new Employee(id);
             //dao.createEmployee(employee);
-            //dao.readEmployee(id);
+            //return dao.readCustomer(id);
+            
+            //The Below worked before change back to this if things break.
             s = dao.readCustomer(id);
-           //s = dao.toString();
             return s;
+           
+            
             //return "TESTTTTTTTTTTTTTTTTTT";
             
         }catch(Exception e)
         {
-            System.out.println("Invalid Employee.");
+            System.out.println("Invalid Customer.");
             e.printStackTrace();
             return e.toString();
         }

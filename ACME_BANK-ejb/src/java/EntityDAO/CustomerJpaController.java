@@ -17,6 +17,10 @@ import Entity.Savings;
 import EntityDAO.exceptions.NonexistentEntityException;
 import EntityDAO.exceptions.RollbackFailureException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.Context;
+import javax.naming.InitialContext;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.transaction.UserTransaction;
@@ -259,5 +263,47 @@ public class CustomerJpaController implements Serializable {
             em.close();
         }
     }
+    
+    public List findCustomerByLastName(String lastName)
+    {
+//code to lookup EntityManager omitted for brevity
+    EntityManager em = getEntityManager();
+    Query query =
+    em.createNamedQuery("Customer.findByLastName");
+    query.setParameter("lastName", lastName);
+    List resultList = query.getResultList();
+    return resultList;
+        }
+
+    public void persist(Object object) {
+        /* Add this to the deployment descriptor of this module (e.g. web.xml, ejb-jar.xml):
+         * <persistence-context-ref>
+         * <persistence-context-ref-name>persistence/LogicalName</persistence-context-ref-name>
+         * <persistence-unit-name>ACME_BANK-ejbPU</persistence-unit-name>
+         * </persistence-context-ref>
+         * <resource-ref>
+         * <res-ref-name>UserTransaction</res-ref-name>
+         * <res-type>javax.transaction.UserTransaction</res-type>
+         * <res-auth>Container</res-auth>
+         * </resource-ref> */
+        try {
+            Context ctx = new InitialContext();
+            UserTransaction utx = (UserTransaction) ctx.lookup("java:comp/env/UserTransaction");
+            utx.begin();
+            EntityManager em = (EntityManager) ctx.lookup("java:comp/env/persistence/LogicalName");
+            em.persist(object);
+            utx.commit();
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", e);
+            throw new RuntimeException(e);
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
     
 }
