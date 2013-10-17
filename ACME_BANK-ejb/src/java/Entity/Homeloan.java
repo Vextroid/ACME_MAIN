@@ -22,6 +22,8 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author Vextroid
  */
+//HomeLoan
+
 @Entity
 @Table(name = "HOMELOAN")
 @XmlRootElement
